@@ -45,12 +45,12 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     
 Check the Docker Swarm Setup:
 
-cumulus@server01:~$ sudo docker node ls
-ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-5j4ur5z70jhg18tibmti59eqi     server03            Ready               Active              Reachable
-cvaw88qajb8ovn0ip22adaeo8     server04            Ready               Active              
-naptasyz6qjqd3292y6lvbrso *   server01            Ready               Active              Leader
-uoq6z23klm0l4i5387nv8p3ul     server02            Ready               Active              Reachable
+    cumulus@server01:~$ sudo docker node ls
+    ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+    5j4ur5z70jhg18tibmti59eqi     server03            Ready               Active              Reachable
+    cvaw88qajb8ovn0ip22adaeo8     server04            Ready               Active              
+    naptasyz6qjqd3292y6lvbrso *   server01            Ready               Active              Leader
+    uoq6z23klm0l4i5387nv8p3ul     server02            Ready               Active              Reachable
 
     
 
