@@ -28,7 +28,8 @@ On Servers:
 Quickstart: Run the demo
 ------------------------
 
-Before running this demo, install VirtualBox and Vagrant. The currently supported versions of VirtualBox and Vagrant can be found in the cldemo-vagrant prequisites section.
+Before running this demo, install VirtualBox and Vagrant. The currently supported versions of VirtualBox and Vagrant can be found in the [cldemo-vagrant](https://github.com/CumulusNetworks/cldemo-vagrant) prequisites section.
+ 
 
     git clone https://github.com/cumulusnetworks/cldemo-vagrant
     cd cldemo-vagrant
