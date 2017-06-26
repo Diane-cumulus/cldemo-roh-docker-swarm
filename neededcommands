@@ -1,0 +1,6 @@
+- name: obtain token
+  shell: docker swarm join-token worker |grep token |awk ' { print $2 } '
+  register: swarm_token
+
+- name: use token somehow
+  shell: docker swarm join --token {{ swarm_token.stdout }} {{interfaces.server01.loopback}}:2377

@@ -1,0 +1,3 @@
+---
+- name: initiate the swarm manager
+  shell: docker swarm init --advertise-addr {{interfaces.server01.loopback}} > token

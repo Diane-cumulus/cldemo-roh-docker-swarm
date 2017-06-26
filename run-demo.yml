@@ -1,0 +1,40 @@
+---
+- hosts: spines:leafs
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - configure-interfaces
+    - quagga
+
+- hosts: mgmtserver:workerservers
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - install-docker-ifupdown2
+    - configure-interfaces
+    - deploy-roh
+#    - deploy-containers
+
+- hosts: mgmtserver
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+    - initiate-swarm-manager
+    - obtain-swarm-token
+
+- hosts: workerservers
+  user: cumulus
+  become: yes
+  become_method: sudo
+  roles:
+     - join-the-swarm
+
+- hosts: mgmtserver
+   user: cumulus
+   become: yes
+   become_method: sudo
+   roles:
+     - create-service

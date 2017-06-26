@@ -1,0 +1,3 @@
+---
+- name: Worker nodes join the swarm
+  shell: docker swarm join --token {{ swarm_token.stdout }} {{interfaces.server01.loopback}}:2377

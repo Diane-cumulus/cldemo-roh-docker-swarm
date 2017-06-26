@@ -1,0 +1,4 @@
+---
+- name: obtain token
+  shell: docker swarm join-token -q worker 
+  register: swarm_token

@@ -1,0 +1,26 @@
+{% set intvars = interfaces[inventory_hostname] -%}
+!
+{% for neighbor in intvars.neighbors %}
+interface {{ neighbor }}
+ ipv6 nd ra-interval 10
+ no ipv6 nd suppress-ra
+!
+{% endfor %}
+router bgp {{ intvars.asn }}
+    bgp router-id {{ intvars.loopback }}
+    network {{ intvars.loopback }}/32
+{% for neighbor in intvars.neighbors %}
+    neighbor {{ neighbor }} interface remote-as external
+    neighbor {{ neighbor }} filter-list HOST_ORIGINATED_ROUTES out
+{% endfor %}
+{% if intvars.redistribute is defined %}
+    redistribute {{intvars.redistribute}} route-map DOCKER_BRIDGES
+{% endif %}
+!
+ip as-path access-list HOST_ORIGINATED_ROUTES permit ^$
+!
+ip prefix-list SHARED_DOCKER_SUBNET seq 5 permit 172.16.0.0/16 le 32
+!
+route-map DOCKER_BRIDGES permit 10
+ match ip address prefix-list SHARED_DOCKER_SUBNET
+!
