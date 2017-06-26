@@ -15,13 +15,15 @@ Software in Use:
 ----------------
 
 On Spines and Leafs:
-Cumulus v3.3.0
+
+ - Cumulus v3.3.0
 
 On Servers:
-Ubuntu 16.04
-Docker-CE v17.05
-cumulusnetworks/quagga:latest (container image)
-php:5.6-apache (container image)
+
+ - Ubuntu 16.04 Docker-CE v17.05 
+ - cumulusnetworks/quagga:latest (container image)
+ - nginx (container image)
+  
 
 Quickstart: Run the demo
 ------------------------
