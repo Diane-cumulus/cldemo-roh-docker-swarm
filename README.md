@@ -5,11 +5,11 @@ The virtual setup is depicted below:
 
 A docker swarm management node [server01] is configured and 3 additional worker nodes [server02, 03 and 04] are configured.   The management node is also a worker node. 
 
-When a worker node joins a swarm, Docker Swarm creates VXLAN tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  The VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
+When a worker node joins a swarm, Docker Swarm creates VXLAN tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  In this demo, the VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
 
-The management node [Server01] then creates an apache service [ 3 instances of apache containers] on the management and worker nodes. (If more are required, edit the /group_vars/all file services.replicas value)
+The management node [Server01] then creates an nginx service [ 3 instances of nginx containers] on the management and worker nodes. (If more are required, edit the /group_vars/all file services.replicas value)
 
-We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
+We can access the replicated nginx containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
 
 Software in Use:
 ----------------
