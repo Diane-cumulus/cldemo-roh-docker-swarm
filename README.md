@@ -7,9 +7,9 @@ A docker swarm management node [server01] is configured and 3 additional worker 
 
 When a worker node joins a swarm, Docker Swarm creates VXLAN tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  In this demo, the VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
 
-The management node [Server01] then creates an nginx service [ 3 instances of nginx containers] on the management and worker nodes. (If more are required, edit the /group_vars/all file services.replicas value)
+The management node [Server01] then creates an apache service [ 3 instances of apache containers] on the management and worker nodes. (If more are required, edit the /group_vars/all file services.replicas value)
 
-We can access the replicated nginx containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
+We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
 
 Software in Use:
 ----------------
@@ -22,7 +22,7 @@ On Servers:
 
  - Ubuntu 16.04 Docker-CE v17.05 
  - cumulusnetworks/quagga:latest (container image)
- - nginx (container image)
+ - apache (container image)
   
 
 Quickstart: Run the demo
@@ -43,61 +43,32 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     ansible-playbook run-demo.yml
     
     
-
-Viewing the Results
--------
--------------------
-SSH to the Docker Swarm management node:
-
-    ssh server01
-
 Check the Docker Swarm Setup:
 
-    cumulus@server01:~$ sudo docker node ls
-    ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
-    41ihuz7nsa34bqsaezwkme0n9     server02            Ready               Active              
-    9vn0e8j79zthwu8pmz9qr7pid     server03            Ready               Active              
-    q6o4qhu4q6xmc9247oqdy8m1n *   server01            Ready               Active              Leader
-    ty3dl1ygnqng30rsj4bdq333r     server04            Ready               Active    
+cumulus@server01:~$ sudo docker node ls
+ID                            HOSTNAME            STATUS              AVAILABILITY        MANAGER STATUS
+5j4ur5z70jhg18tibmti59eqi     server03            Ready               Active              Reachable
+cvaw88qajb8ovn0ip22adaeo8     server04            Ready               Active              
+naptasyz6qjqd3292y6lvbrso *   server01            Ready               Active              Leader
+uoq6z23klm0l4i5387nv8p3ul     server02            Ready               Active              Reachable
+
+    
 
 
 View the Services:
 
     cumulus@server01:~$ sudo docker service ls
-    ID                  NAME                MODE                REPLICAS            IMAGE               PORTS
-    pgg18bvmidap        apache_web          replicated          3/3                 php:5.6-apache      *:8080->80/tcp
+    ID                  NAME                MODE                REPLICAS            IMAGE               PORTS 
+    zajgxoinvvb9        apache_web          replicated          3/3                 php:5.6-apache      *:8080->80/tcp
+    
+
 
 
 Curl to the service from a leaf node: [10.0.0.32 is loopback of a server02]
 
-    cumulus@leaf02:~$ curl 10.0.0.32:8080
-    <!DOCTYPE html>
-    <html>
-    <head>
-    <title>Welcome to nginx!</title>
-    <style>
-    body {
-        width: 35em;
-        margin: 0 auto;
-        font-family: Tahoma, Verdana, Arial, sans-serif;
-         }
-         </style>
-         </head>
-         <body>
-         <h1>Welcome to nginx!</h1>
-         <p>If you see this page, the nginx web server is successfully installed and
-         working. Further configuration is required.</p>
-         <p>For online documentation and support please refer to
-         <a href="http://nginx.org/">nginx.org</a>.<br/>
-         Commercial support is available at
-         <a href="http://nginx.com/">nginx.com</a>.</p> 
-         <p>For online documentation and support please refer to
-         <a href="http://nginx.org/">nginx.org</a>.<br/> 
-         Commercial support is available at 
-         <a href="http://nginx.com/">nginx.com</a>.</p>
-         <p><em>Thank you for using nginx.</em></p>
-         </body>
-         </html>
+    cumulus@leaf01:~$ curl 10.0.0.32:8080
+    
+
 
 
 
