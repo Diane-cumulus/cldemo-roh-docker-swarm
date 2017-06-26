@@ -118,12 +118,12 @@ View the Configuration of Quagga in the Quagga Container and look at BGP peering
 
 Test Application Reachability
 
-Here we are using PHP/Apache webservers to represent our container workloads. To test that the applications are reachable across the fabric login to server01 and use the curl command to view an application running on a container across the fabric.
+Here we are using NGINX webservers to represent our container workloads. To test that the applications are reachable across the fabric login to server01 and use the curl command to view an application running on a container across the fabric.
 
 
 Privileged Mode Containers
 
-The Cumulus RoH container is deployed as a privileged container with access to the "host" network. This means that the applications running in the container have unfettered access to the interfaces and kernel just like a real baremetal application would. This can be dangerous if the container were to become comprimised as the container essentially has root access.
+The Cumulus RoH container is deployed as a privileged container with access to the "host" network. This means that the applications running in the container have unfettered access to the interfaces and kernel just like a real baremetal application would. This can be dangerous if the container were to become compromised as the container essentially has root access.
 
 Manually Starting and Stopping the Cumulus RoH Container
 
