@@ -13,3 +13,11 @@ server01
 server02
 server03
 server04
+
+[mgmtserver]
+server01
+
+[workerservers]
+server02
+server03
+server04
