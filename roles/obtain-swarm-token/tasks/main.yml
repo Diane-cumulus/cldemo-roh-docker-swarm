@@ -1,9 +1,13 @@
 ---
-#- name: obtain token
-#  shell: docker swarm join-token -q worker 
-#  register: swarm_token
-  
 - name: obtain token
-  shell: docker swarm join-token worker |grep token |awk ' { print $2 } '
+  shell: docker swarm join-token -q worker 
   register: swarm_token_worker
+  
+#- name: obtain token
+#  shell: docker swarm join-token worker |grep token |awk ' { print $2 } '
+#  register: swarm_token_worker
+
+- name: obtain token
+  shell: docker swarm join-token -q manager 
+  register: swarm_token_manager
 
