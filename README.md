@@ -64,7 +64,7 @@ View the Services:
 
 
 
-Curl to the service from a leaf node: [10.0.0.32 is loopback of a server02]
+Curl to the service from a leaf node using port 8080: [10.0.0.32 is loopback of a server02]
 
     cumulus@leaf01:~$ curl 10.0.0.32:8080
     
