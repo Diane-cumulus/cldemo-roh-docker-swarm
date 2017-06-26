@@ -45,7 +45,7 @@ Viewing the Results
 -------------------
 SSH to the Docker Swarm management node:
 
-    ssh server01
+    cumulus@oob-mgmt-server:~/cldemo-roh-docker-swarm$ ssh server01
 
 Check the Docker Swarm Setup:
 
