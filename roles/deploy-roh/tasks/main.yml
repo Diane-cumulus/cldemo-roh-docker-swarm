@@ -28,14 +28,14 @@
       - "/root/quagga/daemons:/etc/quagga/daemons"
       - "/root/quagga/Quagga.conf:/etc/quagga/Quagga.conf"
 
-- name: Create a network with options
-  docker_network:
-    name: "{{interfaces[inventory_hostname].docker_network}}"
-    driver_options:
-      com.docker.network.bridge.name: "{{docker_networks[interfaces[inventory_hostname].docker_network].bridge_name}}"
-      com.docker.network.bridge.enable_icc: 'true'
-      com.docker.network.bridge.enable_ip_masquerade: 'false'
-      com.docker.network.driver.mtu: '9000'
-    ipam_options:
-      subnet: "{{docker_networks[interfaces[inventory_hostname].docker_network].subnet}}"
-      gateway: "{{docker_networks[interfaces[inventory_hostname].docker_network].gateway}}"
+#- name: Create a network with options
+#  docker_network:
+#    name: "{{interfaces[inventory_hostname].docker_network}}"
+#    driver_options:
+#      com.docker.network.bridge.name: "{{docker_networks[interfaces[inventory_hostname].docker_network].bridge_name}}"
+#      com.docker.network.bridge.enable_icc: 'true'
+#      com.docker.network.bridge.enable_ip_masquerade: 'false'
+#      com.docker.network.driver.mtu: '9000'
+#    ipam_options:
+#      subnet: "{{docker_networks[interfaces[inventory_hostname].docker_network].subnet}}"
+#      gateway: "{{docker_networks[interfaces[inventory_hostname].docker_network].gateway}}"
