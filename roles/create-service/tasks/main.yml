@@ -1,3 +1,6 @@
 ---
+- name: Promote other workers to be backup managers
+  shell: docker node promote server02 server03
+
 - name: Create Service
   shell: docker service create --name nginx_web --replicas {{services.replicas}} --publish 8080:80 nginx
