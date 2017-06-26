@@ -12,6 +12,7 @@ The management node [Server01] then creates an apache service [ 3 instances of a
 We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
 
 Software in Use:
+----------------
 
 On Spines and Leafs:
 Cumulus v3.3.0
@@ -23,6 +24,7 @@ cumulusnetworks/quagga:latest (container image)
 php:5.6-apache (container image)
 
 Quickstart: Run the demo
+------------------------
 
 Before running this demo, install VirtualBox and Vagrant. The currently supported versions of VirtualBox and Vagrant can be found in the cldemo-vagrant prequisites section.
 
@@ -66,17 +68,35 @@ View the Services:
 Curl to the service from a leaf node: [10.0.0.32 is loopback of a server02]
 
     cumulus@leaf02:~$ curl 10.0.0.32:8080
-    <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-    <html><head>
-    <title>403 Forbidden</title>
-    </head><body>
-    <h1>Forbidden</h1>
-    <p>You don't have permission to access /
-    on this server.<br />
-    </p>
-    <hr>
-    <address>Apache/2.4.10 (Debian) Server at 10.0.0.32 Port 8080</address>
-    </body></html>
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Welcome to nginx!</title>
+    <style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+         }
+         </style>
+         </head>
+         <body>
+         <h1>Welcome to nginx!</h1>
+         <p>If you see this page, the nginx web server is successfully installed and
+         working. Further configuration is required.</p>
+         <p>For online documentation and support please refer to
+         <a href="http://nginx.org/">nginx.org</a>.<br/>
+         Commercial support is available at
+         <a href="http://nginx.com/">nginx.com</a>.</p> 
+         <p>For online documentation and support please refer to
+         <a href="http://nginx.org/">nginx.org</a>.<br/> 
+         Commercial support is available at 
+         <a href="http://nginx.com/">nginx.com</a>.</p>
+         <p><em>Thank you for using nginx.</em></p>
+         </body>
+         </html>
+
+
 
 Check Container Interfaces:
 
@@ -114,8 +134,6 @@ docker run -itd --name=cumulus-roh --privileged --net=host \
 
 # Stop the Container
 docker rm -f cumulus-roh
-
-
 
 
 
