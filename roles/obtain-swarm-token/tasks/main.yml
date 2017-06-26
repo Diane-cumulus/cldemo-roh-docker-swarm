@@ -5,5 +5,5 @@
   
 - name: obtain token
   shell: docker swarm join-token worker |grep token |awk ' { print $2 } '
-  register: swarm_token
+  register: swarm_token_worker
 
