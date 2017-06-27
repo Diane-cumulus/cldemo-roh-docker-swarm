@@ -1,7 +1,7 @@
 This demo shows one of several different approaches to running Docker. This approach uses Docker Swarm to create VXLAN tunnels between the servers.   Extra redundancy to the hosts is provided using Cumulus Routing on the Host with BGP unnumbered.
 
 The virtual setup is depicted below:
-![Virtual  Demo Topology](https://github.com/CumulusNetworks/cldemo-roh-docker-swarm/blob/master/docker_swarm_roh.png)
+![Virtual  Demo Topology](https://github.com/CumulusNetworks/cldemo-roh-docker-swarm/blob/master/cldemo-roh-docker-swarm.png)
 
 A docker swarm management node [server01] is configured and 3 additional worker nodes [server02, 03 and 04] are configured. Server02 and Server03 are promoted to management nodes for redundancy.  The management node is also a worker node. 
 
