@@ -7,9 +7,9 @@ A docker swarm management node [server01] is configured and 3 additional worker 
 
 When a worker node joins a swarm, Docker Swarm creates VXLAN tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  In this demo, the VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
 
-The management node [Server01] then creates an apache service [ 3 instances of apache containers] on the management and worker nodes. (If more are required, edit the /group_vars/all file services.replicas value in the playbook)
+The management node [Server01] then creates an apache service [ 3 instances of apache containers] on the worker nodes (which may include server01). (If more are required, edit the /group_vars/all file services.replicas value in the playbook)
 
-We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, access within the VXLAN (container to container) via ping. 
+We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, and/or access within the VXLAN (container to container) via ping. 
 
 Software in Use:
 ----------------
@@ -41,6 +41,7 @@ Before running this demo, install VirtualBox and Vagrant. The currently supporte
     git clone https://github.com/cumulusnetworks/cldemo-roh-docker-swarm
     cd cldemo-roh-docker-swarm
     ansible-playbook run-demo.yml
+    ssh server01
     
     
 Check the Docker Swarm Setup:
@@ -64,7 +65,7 @@ View the Services:
 
 
 
-Curl to the service from a leaf node using port 8080: [10.0.0.32 is loopback of a server02]
+Curl to the service from a leaf node using port 8080 [10.0.0.32 is loopback of server02]
 
     cumulus@leaf01:~$ curl 10.0.0.32:8080
     
@@ -87,11 +88,6 @@ View the Configuration of Quagga in the Quagga Container and look at BGP peering
     
 
 
-Test Application Reachability
-
-Here we are using NGINX webservers to represent our container workloads. To test that the applications are reachable across the fabric login to server01 and use the curl command to view an application running on a container across the fabric.
-
-
 Privileged Mode Containers
 
 The Cumulus RoH container is deployed as a privileged container with access to the "host" network. This means that the applications running in the container have unfettered access to the interfaces and kernel just like a real baremetal application would. This can be dangerous if the container were to become compromised as the container essentially has root access.
@@ -100,13 +96,16 @@ Manually Starting and Stopping the Cumulus RoH Container
 
 If you want to try running the Cumulus RoH container in your own environment you can use the automation provided in this repository as a starting point or experiment manually with the container. Notice we're passing in the Quagga.conf file as well to configure the Quagga Routing Daemon upon container startup.
 
-# Start the Container
+# Start the RoH Container
 docker run -itd --name=cumulus-roh --privileged --net=host \
     -v /root/quagga/daemons:/etc/quagga/daemons \
     -v /root/quagga/Quagga.conf:/etc/quagga/Quagga.conf \
     cumulusnetworks/quagga:latest
 
-# Stop the Container
+# Stop the RoH Container
+docker stop cumulus-roh
+
+# Remove the RoH Container from the Host
 docker rm -f cumulus-roh
 
 
