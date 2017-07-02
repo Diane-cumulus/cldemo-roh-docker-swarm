@@ -8,6 +8,7 @@ interface {{ neighbor }}
 {% endfor %}
 router bgp {{ intvars.asn }}
     bgp router-id {{ intvars.loopback }}
+    bgp bestpath as-path multipath-relax
 {% for neighbor in intvars.neighbors %}
     neighbor {{ neighbor }} interface remote-as external
     neighbor {{ neighbor }} filter-list HOST_ORIGINATED_ROUTES out
