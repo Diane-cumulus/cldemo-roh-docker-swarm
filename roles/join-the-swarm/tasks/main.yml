@@ -1,5 +1,5 @@
 ---
-- name: Worker02 node join the swarm
-  shell: docker swarm join --token {{ hostvars.server01.swarm_token_worker.stdout }} {{interfaces.server01.loopback}}:2377
+- name: Worker nodes join the swarm
+  shell: docker swarm join --token {{ hostvars.server01.swarm_token_worker.stdout }} --advertise-addr {{ interfaces[ansible_hostname].loopback }} {{interfaces.server01.loopback}}:2377
   
-# --advertise-addr {{ interfaces.[ansible_hostname].loopback }}
+
