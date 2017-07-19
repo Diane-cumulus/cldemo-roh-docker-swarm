@@ -3,8 +3,17 @@
 # which interfaces are neighbors and networks come from the group_vars/all file.
 - name: configure /etc/network/interfaces
   template: src=interfaces.j2 dest=/etc/network/interfaces
-  notify: reload networking
+  # notify: reload networking
 
+- name: restarts switches with their new configuration
+      shell: sleep 1 && shutdown -r 0
+      async: 1
+      poll: 0
+      ignore_errors: true
+
+- name: Wait for switches to come back up
+      local_action: wait_for port=22 host="{{ inventory_hostname }}" search_regex=OpenSSH delay=10  
+   
 - name: Bring Loopback Interface Up
   shell: "ifup lo"
 
