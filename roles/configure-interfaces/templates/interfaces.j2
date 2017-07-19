@@ -7,9 +7,8 @@ iface lo inet loopback
   address {{ intvars.loopback }}/32
 
 auto eth0
-iface eth0
+iface eth0 inet dhcp
    vrf mgmt
-   address dhcp
    
 interface mgmt
   address 127.0.0.1/8
