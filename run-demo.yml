@@ -5,6 +5,7 @@
   become_method: sudo
   roles:
     - configure-interfaces
+    - mv-ntp-mgmt
     - quagga
 
 - hosts: mgmtserver:workerservers
