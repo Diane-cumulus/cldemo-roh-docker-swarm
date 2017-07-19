@@ -6,8 +6,7 @@
   # notify: reload networking
 
 - name: restarts switches with their new configuration
-  command:  ifreload -a
-  #shell: sleep 1 && shutdown -r 0
+  shell: sleep 1 && shutdown -r 0
   async: 1
   poll: 0
   ignore_errors: true
