@@ -5,11 +5,18 @@ interface {{ neighbor }}
  ipv6 nd ra-interval 10
  no ipv6 nd suppress-ra
 !
+route-map LOCAL_ROUTES permit 10
+  match interface lo
+!
 {% endfor %}
 router bgp {{ intvars.asn }}
     bgp router-id {{ intvars.loopback }}
-    network {{ intvars.loopback }}/32
+#    network {{ intvars.loopback }}/32
 {% for neighbor in intvars.neighbors %}
     neighbor {{ neighbor }} interface remote-as external
 {% endfor %}
 !
+ address-family ipv4 unicast
+    redistribute connected route-map LOCAL_ROUTES
+!
+
