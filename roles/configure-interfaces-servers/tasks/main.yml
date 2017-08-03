@@ -3,6 +3,16 @@
 - name: configure /etc/network/interfaces
   template: src=interfaces.j2 dest=/etc/network/interfaces
   # notify: reload networking
-  
-- name:  reload networking
-  command:  ifreload -a
+ 
+# - name: Bring Loopback Interface Up
+#  shell: "ifup lo"
+
+- name: Bring eth1 Interfaces Up
+  shell: "ifup {{item}}"
+  with_items: 
+    lo
+    eth1
+    eth2
+
+ 
+
