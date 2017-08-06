@@ -11,6 +11,7 @@ route-map LOCAL_ROUTES permit 10
 {% endfor %}
 router bgp {{ intvars.asn }}
     bgp router-id {{ intvars.loopback }}
+    bgp bestpath as-path multipath-relax
 #    network {{ intvars.loopback }}/32
 {% for neighbor in intvars.neighbors %}
     neighbor {{ neighbor }} interface remote-as external
