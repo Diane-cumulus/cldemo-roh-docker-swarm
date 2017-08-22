@@ -65,9 +65,9 @@ View the Services:
 
 
 
-Curl to the service from a leaf node using port 8080 [10.0.0.32 is loopback of server02]
+Curl to the service from a spine node using port 8080 [172.16.1.101 is the bond address loopback of server01]
 
-    cumulus@leaf01:mgmt-vrf:~$ sudo vrf task exec default curl 10.0.0.32:8080
+    cumulus@spine01:mgmt-vrf:~$ sudo vrf task exec default curl 172.16.1.101:8080
     
 
 
