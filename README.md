@@ -90,7 +90,7 @@ View the Configuration of Quagga in the Quagga Container and look at BGP peering
 
 # Privileged Mode Containers
 
-The Cumulus RoH container is deployed as a privileged container with access to the "host" network. This means that the applications running in the container have unfettered access to the interfaces and kernel just like a real baremetal application would. This can be dangerous if the container were to become compromised as the container essentially has root access.
+The Cumulus RoH container is deployed as a privileged container with access to the "host" network. This means that the applications running in the container have unfettered access to the interfaces and kernel just like a real baremetal application would. The container essentially has root access and treat it as such.
 
 # Manually Starting and Stopping the Cumulus RoH Container
 
