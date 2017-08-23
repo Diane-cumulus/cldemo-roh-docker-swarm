@@ -1,15 +1,16 @@
-This demo shows one of several different approaches to running Docker. This approach uses Docker Swarm to create VXLAN tunnels between the servers.   Extra redundancy to the hosts is provided using Cumulus Routing on the Host with BGP unnumbered.
+This demo shows one of several different approaches to running Docker. This approach uses Docker Swarm to create overlay (vxlan) tunnels between the servers.   Extra redundancy to the hosts is provided using Cumulus Host Pack with BGP unnumbered. More information on this demo is included in the Cumulus Networks Whitepaper: [Container Networking with Cumulus Linux Validated Design Guide: Using Docker Swarm with Host Pack](https://cumulusnetworks.com/learn/web-scale-networking-resources/validated-design-guides/Container-with-VXLAN-and-Docker-Swarm-with-Host-Pack/)
+
 
 The virtual setup is depicted below:
 ![Virtual  Demo Topology](https://github.com/CumulusNetworks/cldemo-roh-docker-swarm/blob/master/cldemo-roh-docker-swarm.png)
 
 A docker swarm management node [server01] is configured and 2 additional worker nodes [server02 and server03] are configured. Server02 and Server03 are promoted to management nodes for redundancy.  All management nodes are also a worker nodes. 
 
-When a worker node joins a swarm, Docker Swarm creates VXLAN tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  In this demo, the VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
+When a worker node joins a swarm, Docker Swarm creates overlay (vxlan) tunnels between the worker node and the other worker and management node[s] for inter-container, inter-node communication using the overlay driver.  In this demo, the VTEPs are configured to be the server loopback addresses.  Docker Swarm also uses the bridge driver on a network called docker_gwbridge to access the containers from outside the vxlan.  
 
 The management node [Server01] then creates an apache service [ 3 instances of apache containers] on the worker nodes (which may include server01). (If more are required, edit the /group_vars/all file services.replicas value in the playbook)
 
-We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, and/or access within the VXLAN (container to container) via ping. 
+We can access the replicated apache containers from either outside the VXLAN via CURL on port 8080, and/or access within the overlay(vxlan) (container to container) via ping. 
 
 Software in Use:
 ----------------
