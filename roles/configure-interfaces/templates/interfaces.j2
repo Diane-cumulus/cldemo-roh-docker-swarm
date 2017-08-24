@@ -7,8 +7,9 @@ iface lo inet loopback
   address {{ intvars.loopback }}/32
 
 auto eth0
-iface eth0 inet dhcp
+iface eth0 inet static
    vrf mgmt
+   address {{ intvars.eth0 }}/24
    
 auto mgmt
 iface mgmt
