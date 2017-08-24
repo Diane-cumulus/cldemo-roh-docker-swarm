@@ -7,6 +7,7 @@ services:
 interfaces:
     leaf01:
       loopback: "10.0.0.11"
+      eth0: "192.168.0.11"
       asn: 65011
       neighbors:
         swp1:
@@ -15,6 +16,7 @@ interfaces:
         swp52:
     leaf02:
       loopback: "10.0.0.12"
+      eth0: "192.168.0.12"
       asn: 65012
       neighbors:
         swp1:
@@ -23,6 +25,7 @@ interfaces:
         swp52:
     leaf03:
       loopback: "10.0.0.13"
+      eth0: "192.168.0.13"
       asn: 65013
       neighbors:
         swp1:
@@ -31,6 +34,7 @@ interfaces:
         swp52:
     leaf04:
       loopback: "10.0.0.14"
+      eth0: "192.168.0.14"
       asn: 65014
       neighbors:
         swp1:
@@ -39,6 +43,7 @@ interfaces:
         swp52:
     spine01:
       loopback: "10.0.0.21"
+      eth0: "192.168.0.21"
       asn: 65020
       neighbors:
         swp1:
@@ -47,6 +52,7 @@ interfaces:
         swp4:
     spine02:
       loopback: "10.0.0.22"
+      eth0: "192.168.0.22"
       asn: 65020
       neighbors:
         swp1:
@@ -55,6 +61,7 @@ interfaces:
         swp4:
     server01:
       loopback: "10.0.0.31"
+      eth0: "192.168.0.31"
       asn: 65031
       redistribute: "connected"
       neighbors:
@@ -63,6 +70,7 @@ interfaces:
       docker_network: network_a
     server02:
       loopback: "10.0.0.32"
+      eth0: "192.168.0.32"
       asn: 65032
       redistribute: "connected"
       neighbors:
@@ -71,6 +79,7 @@ interfaces:
       docker_network: network_b
     server03:
       loopback: "10.0.0.33"
+      eth0: "192.168.0.33"
       asn: 65033
       redistribute: "connected"
       neighbors:
@@ -79,6 +88,7 @@ interfaces:
       docker_network: network_c
     server04:
       loopback: "10.0.0.34"
+      eth0: "192.168.0.34"
       asn: 65034
       redistribute: "connected"
       neighbors:
